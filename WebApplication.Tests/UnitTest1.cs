@@ -1,13 +1,8 @@
 using NUnit.Framework;
-/*using OsmSharp.IO.API;*/
 using WebApplication;
 using System.Threading.Tasks;
-/*using OsmSharp.IO.API.Overpass;
-using OsmSharp.API;*/
 using System.Net.Http;
 using System.Net;
-/*using OsmSharp.Streams;
-using OsmSharp;*/
 using System.Collections.Generic;
 using System;
 using System.IO;
@@ -25,8 +20,60 @@ namespace WebApplication.Tests
 
         private const string WayName = "way";
         private const string NodeName = "node";
+
         [Test]
-        public void ParseXmlBuildings()
+        public Double calculateTheDistance(Center c1, Center c2)
+        {
+            // перевести координаты в радианы
+            var lat1 = c1.Latitude * Math.PI / 180;
+            var lat2 = c2.Latitude * Math.PI / 180;
+            var long1 = c1.Longitude * Math.PI / 180;
+            var long2 = c2.Longitude * Math.PI / 180;
+  
+            // косинусы и синусы широт и разницы долгот
+            var cl1 = Math.Cos(lat1);
+            var cl2 = Math.Cos(lat2);
+            var sl1 = Math.Sin(lat1);
+            var sl2 = Math.Sin(lat2);
+            var delta = long2 - long1;
+            var cdelta = Math.Cos(delta);
+            var sdelta = Math.Sin(delta);
+  
+            // вычисления длины большого круга
+            var y = Math.Sqrt(Math.Pow(cl2 * sdelta, 2) + Math.Pow(cl1 * sl2 - sl1 * cl2 * cdelta, 2));
+            var x = sl1 * sl2 + cl1 * cl2 * cdelta;
+  
+            var ad = Math.Atan2(y, x);
+            var dist = ad* 6372795;
+            return dist;
+        }
+
+
+        [Test]
+        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter)
+        {
+            var list = new List<HeatmapElement>();
+            foreach(Node node in addreses)
+            {
+                HeatmapElement heatmapElement = new HeatmapElement();
+                heatmapElement.Center = node.Center;
+                var score = 0.25;
+                foreach (Node nodeFilter in filter)
+                {
+                    var dist = calculateTheDistance(node.Center, nodeFilter.Center);
+                    if (dist < 1000 && score < 1)
+                    {
+                        score += 0.25;
+                    }
+                }
+                heatmapElement.Coefficient = score;
+                list.Add(heatmapElement);
+            }
+            return list;
+        }
+
+            [Test]
+        public List<Node> ParseXmlBuildings()
         {
             var queryAllLiveBuildings1 = "area[name = \"Волгоград\"];(node[\"building\" = \"apartments\"](area);node[\"building\" = \"detached\"](area);node[\"building\" = \"house\"](area);); out center; out;";
             var request = WebRequest.Create(
@@ -50,16 +97,12 @@ namespace WebApplication.Tests
                     }
                 }
             }
-
-            foreach (var way in list)
-            {
-                Console.WriteLine(way.Center.Longitude);
-            }
+            return list;
         }
 
 
         [Test]
-        public void ParseXmlShops()
+        public List<Node> ParseXmlShops()
         {
             var queryAllLiveBuildings1 = "area[name = \"Волгоград\"];(node[\"shop\" = \"department_store\"](area);node[\"shop\" = \"general\"](area);node[\"shop\" = \"mall\"](area);node[\"shop\" = \"supermarket\"](area);node[\"shop\" = \"convenience\"](area);node[\"shop\" = \"department_store\"](area);node[\"shop\" = \"general\"](area);node[\"shop\" = \"mall\"](area);node[\"shop\" = \"supermarket\"](area);node[\"shop\" = \"convenience\"](area);); out center; out;";
             var request = WebRequest.Create(
@@ -88,11 +131,7 @@ namespace WebApplication.Tests
                     }
                 }
             }
-
-            foreach (var way in ways)
-            {
-                Console.WriteLine(way.Center.Longitude);
-            }
+            return ways;
         }
 
 
@@ -173,13 +212,11 @@ namespace WebApplication.Tests
         public Center Center { get; set; }
     }
 
-/*    public class Node
+    public class HeatmapElement
     {
-        public int Id { get; set; }
-        public double Latitude { get; set; }
-        public List<Tag> Tags { get; set; }
-        public double Longitude { get; set; }
-    }*/
+        public Center Center { get; set; }
+        public double Coefficient{ get; set; }
+}
 
     public class Tag
     {
