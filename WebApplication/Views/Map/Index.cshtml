@@ -1,8 +1,8 @@
 ﻿@page
-@model IndexModel
-@{
+@model List<HeatmapElement>
+@*@{
     ViewData["Title"] = "Home page";
-}
+}*@
 
 @*<div class="text-center">
         <h1 class="display-4">Welcome</h1>
@@ -12,8 +12,7 @@
 <link href="~/css/leaflet.css" rel="stylesheet" />
 <script src="~/js/leaflet.js" asp-append-version="true"></script>
 <script src="~/js/leaflet-heat.js" asp-append-version="true"></script>
-<script 
-        src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js">
+<script src="http://leaflet.github.io/Leaflet.heat/dist/leaflet-heat.js">
 </script>
 @*<script src="http://leaflet.github.io/Leaflet.markercluster/example/realworld.10000.js" asp-append-version="true"></script>*@
 @*<script src="~/js/heatmap.js" asp-append-version="true"></script>
@@ -21,8 +20,8 @@
 
 <style>
     #map {
-        height:800px;
-        width:1000px;
+        height: 800px;
+        width: 1000px;
     }
 </style>
 
