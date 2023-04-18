@@ -1,8 +1,4 @@
-﻿@page
-@model List<HeatmapElement>
-@*@{
-    ViewData["Title"] = "Home page";
-}*@
+﻿@model double[][]
 
 @*<div class="text-center">
         <h1 class="display-4">Welcome</h1>
@@ -27,9 +23,9 @@
 
 <div id="map"></div>
 
-<script>
-
-
+<script type="text/javascript">
+    var arr = JSON.parse('@Html.Raw(Json.Serialize(@Model))');
+    console.log(arr);
 @*    let config = {
         minZoom: 7,
         maxZoom: 58,
@@ -80,7 +76,7 @@
         [48.71939, 44.50183, 2.4168],//Волгоград
         [48.78583, 44.77973, 2.4168]//Волжский
 ];
-    var heat = L.heatLayer(quakePoints, {
+    var heat = L.heatLayer(arr, {
         radius: 20,
         blur: 15,
         maxZoom: 17,

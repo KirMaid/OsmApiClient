@@ -24,6 +24,13 @@ namespace WebApplication
             return CalkHeatmap(ParseXmlBuildings(), ParseXmlShops());
         }
 
+        public double[][] calculateHeatmapArray()
+        {
+            var buildings = ParseXmlBuildings();
+            var shops = ParseXmlShops();
+            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlShops());
+        }
+
         public double calculateTheDistance(Center c1, Center c2)
         {
             // перевести координаты в радианы
@@ -82,6 +89,47 @@ namespace WebApplication
             }
             return list;
         }
+
+        public double[][] CalkHeatmapArray(List<Node> addreses, List<Node> filter)
+        {
+            double[][] array = new double[addreses.Count][];
+            NumberFormatInfo MyFormat = new System.Globalization.NumberFormatInfo();
+            MyFormat.NumberDecimalSeparator = ".";
+            int i = 0;
+            foreach (Node node in addreses)
+            {
+                HeatmapElement heatmapElement = new HeatmapElement();
+                heatmapElement.Center = node.Center;
+                var score = 0.0;
+                foreach (Node nodeFilter in filter)
+                {
+                    var dist = calculateTheDistance(node.Center, nodeFilter.Center);
+                    if (dist < 200 && score < 1)
+                    {
+                        if (score > 0.75)
+                            score = 1;
+                        else
+                            score += 0.25;
+                    }
+                    if (dist < 500 && score < 1)
+                    {
+                        if (score > 0.9)
+                            score = 1;
+                        else
+                            score += 0.1;
+                    }
+                }
+                array[i] = new double [3]{heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
+                //array[i, 0] = heatmapElement.Center.Latitude;
+                //array[i, 1] = heatmapElement.Center.Longitude;
+                //array[i, 2] = score;
+                score = 0.0;
+                i++;
+            }
+            return array;
+        }
+
+
 
         public List<Node> ParseXmlBuildings()
         {

@@ -11,7 +11,7 @@ namespace WebApplication.Pages
         public IActionResult Index()
         {
             MapLibrary map = new MapLibrary();
-            var result = map.calculateHeatmap();
+            var result = map.calculateHeatmapArray();
             return View(result);
         }
     }
