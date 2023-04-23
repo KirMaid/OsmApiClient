@@ -21,13 +21,49 @@ namespace MapLibrary
             "detached",
             "house"
         };
-        Dictionary<string, List<string>> dictTags = new Dictionary<string, List<string>>()
+        Dictionary<string, Dictionary<List<string>, List<string>>> dictTags = new Dictionary<string, Dictionary<List<string>, List<string>>>();
+
+        Dictionary<List<string>, List<string>> shopTags = new Dictionary<List<string>, List<string>>()
         {
-            ["shop"]  = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store"},
-            ["school"] = new List<string>() {"school"},
-            ["kindergarten"] = new List<string>() { "kindergarten" },
-            ["hospital"] = new List<string>() {"clinic", "" , "" , "" , "" , "" , "" , "" , "" , "" },
+            [new List<string>() { "shop" }] = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store" },
+            [new List<string>() { "school" }] = new List<string>() {"school"},
+
         };
+
+
+        public void initTags()
+        {
+            dictTags.Add(
+                "shop",
+                new Dictionary<List<string>, List<string>>() {
+                    [new List<string>() { "shop" }] = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store" },
+                });
+
+            dictTags.Add(
+                "school",
+                new Dictionary<List<string>, List<string>>()
+                {
+                    [new List<string>() { "school" }] = new List<string>() { "school" },
+                });
+
+            dictTags.Add(
+               "hospital",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() { "hospital" }] = new List<string>() { "clinic", "hospital" },
+                   [new List<string>() { "kindergarten" }] = new List<string>() { "kindergarten" },
+
+               });
+
+            dictTags.Add(
+               "kindergarten",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() { "kindergarten" }] = new List<string>() { "kindergarten" },
+
+               });
+        }
+
 
 /*        var queryAllLiveBuildings = "area[name=\"Волгоград\"];" +
         "(" +
