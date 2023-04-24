@@ -23,12 +23,11 @@ namespace MapLibrary
         };
         Dictionary<string, Dictionary<List<string>, List<string>>> dictTags = new Dictionary<string, Dictionary<List<string>, List<string>>>();
 
-        Dictionary<List<string>, List<string>> shopTags = new Dictionary<List<string>, List<string>>()
+/*        Dictionary<List<string>, List<string>> shopTags = new Dictionary<List<string>, List<string>>()
         {
             [new List<string>() { "shop" }] = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store" },
             [new List<string>() { "school" }] = new List<string>() {"school"},
-
-        };
+        };*/
 
 
         public void initTags()
@@ -50,18 +49,54 @@ namespace MapLibrary
                "hospital",
                new Dictionary<List<string>, List<string>>()
                {
-                   [new List<string>() { "hospital" }] = new List<string>() { "clinic", "hospital" },
-                   [new List<string>() { "kindergarten" }] = new List<string>() { "kindergarten" },
-
+                   [new List<string>() { "amenity", "building" }] = new List<string>() { "clinic", "hospital" },
                });
 
             dictTags.Add(
                "kindergarten",
                new Dictionary<List<string>, List<string>>()
                {
-                   [new List<string>() { "kindergarten" }] = new List<string>() { "kindergarten" },
+                   [new List<string>() { "amenity", "building" }] = new List<string>() { "kindergarten" },
 
                });
+        }
+
+        public string BuildQuery(Dictionary<List<string>, List<string>> dict)
+        {
+            string startStr = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
+            string str = "";
+            string endStr = ");out center;out;";
+            //string node
+            foreach (var el in dict)
+            {
+                string nodeStr = "";
+                string wayStr = "";
+                string keysStr = "";
+                string tagsStr = "";
+
+                foreach (string listKey in el.Key) {
+                    //keysStr = 
+                    nodeStr += $"node[\"{listKey}\" ~";// \"supermarket|convenience|mall|general|department_store\"](area);";
+                    foreach (string listValue in el.Value)
+                    {
+
+                    }
+                    //List<string> tags = el[listKey];
+                }
+
+                //string tags = dict.get;
+                //foreach () { }
+
+
+
+
+                str += $"node[\"{}\" ~ \"supermarket|convenience|mall|general|department_store\"](area);";
+                str += $"";
+                "node[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
+               "way[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
+            }
+            str = startStr + str + endStr;
+            return str;
         }
 
 

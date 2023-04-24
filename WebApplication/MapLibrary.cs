@@ -28,7 +28,7 @@ namespace WebApplication
         {
             var buildings = ParseXmlBuildings();
             var shops = ParseXmlShops();
-            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlShops());
+            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlShops(), 0.99);
         }
 
         public double calculateTheDistance(Center c1, Center c2)
@@ -90,7 +90,7 @@ namespace WebApplication
             return list;
         }
 
-        public double[][] CalkHeatmapArray(List<Node> addreses, List<Node> filter)
+        public double[][] CalkHeatmapArray(List<Node> addreses, List<Node> filter, double minScore)
         {
             double[][] array = new double[addreses.Count][];
             NumberFormatInfo MyFormat = new System.Globalization.NumberFormatInfo();
@@ -119,7 +119,14 @@ namespace WebApplication
                             score += 0.1;
                     }
                 }
-                array[i] = new double [3]{heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
+                if(score > minScore){
+                    array[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, 0.0 };
+                }
+                else
+                {
+                    array[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
+                }
+                
                 //array[i, 0] = heatmapElement.Center.Latitude;
                 //array[i, 1] = heatmapElement.Center.Longitude;
                 //array[i, 2] = score;
