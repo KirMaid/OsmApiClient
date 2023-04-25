@@ -63,54 +63,32 @@ namespace MapLibrary
 
         public string BuildQuery(Dictionary<List<string>, List<string>> dict)
         {
-            string startStr = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
-            string str = "";
+            string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
             string endStr = ");out center;out;";
-            //string node
             foreach (var el in dict)
             {
-                string nodeStr = "";
-                string wayStr = "";
-                string keysStr = "";
-                string tagsStr = "";
-
+                string nodeWayStr = "";
                 foreach (string listKey in el.Key) {
-                    //keysStr = 
-                    nodeStr += $"node[\"{listKey}\" ~";// \"supermarket|convenience|mall|general|department_store\"](area);";
+                    nodeWayStr += $"[\"{listKey}\" ~ \"";
                     foreach (string listValue in el.Value)
                     {
-
+                        nodeWayStr += listValue + "|";
                     }
-                    //List<string> tags = el[listKey];
+                    nodeWayStr.Remove(nodeWayStr.Length - 1);
+                    nodeWayStr += "\"](area);";
+                    str += "node" + nodeWayStr;
+                    str += "way" + nodeWayStr;
                 }
-
-                //string tags = dict.get;
-                //foreach () { }
-
-
-
-
-                str += $"node[\"{}\" ~ \"supermarket|convenience|mall|general|department_store\"](area);";
-                str += $"";
-                "node[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
-               "way[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
             }
-            str = startStr + str + endStr;
+            str = str + endStr;
             return str;
         }
 
 
-/*        var queryAllLiveBuildings = "area[name=\"Волгоград\"];" +
-        "(" +
-        "node[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
-        "way[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
-        "); " +
-        "out center; " +
-        "out;";*/
-
-        public Map(string format = "array", string apiAddress = "")
+        public Map(string format = "array", string apiAddress = "overpass-api.de")
         {
-            
+            this.format = format;
+            this.apiAddress = apiAddress;
         }
 
         public void setApiAddress(string apiAddress)
