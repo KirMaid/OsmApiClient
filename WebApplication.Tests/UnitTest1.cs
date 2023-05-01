@@ -8,12 +8,13 @@ using System;
 using System.IO;
 using System.Xml;
 using System.Globalization;
+using MapLibrary;
 
 namespace WebApplication.Tests
 {
     public class Tests
     {
-        [Test]
+/*        [Test]
         public void calculateHeatmap()
         {
             MapLibrary map = new MapLibrary();
@@ -22,6 +23,32 @@ namespace WebApplication.Tests
             {
                 Console.WriteLine(elem.Coefficient);
             }
+        }*/
+
+        [Test]
+        public void BuildQueryCity()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            Assert.IsNull(calculator.BuildQueryCity());
         }
+
+        [Test]
+        public void ParseXmlBuildings()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            Assert.IsNull(calculator.ParseXmlBuildings());
+        }
+
+        [Test]
+        public void calculateHeatmapArray()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            //calculator.
+        }
+
+
     } 
 };
