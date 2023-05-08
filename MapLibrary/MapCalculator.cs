@@ -1,6 +1,8 @@
-﻿using System;
+﻿using CsvHelper;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Net;
 using System.Xml;
 
@@ -56,7 +58,34 @@ namespace MapLibrary
             "house"
         };
 
-        Dictionary<string, Dictionary<List<string>, List<string>>> dictTags = new Dictionary<string, Dictionary<List<string>, List<string>>>();
+        Dictionary<string, Dictionary<List<string>, List<string>>> dictTags = new Dictionary<string, Dictionary<List<string>, List<string>>>() {
+            { "shop", 
+                new Dictionary<List<string>, List<string>>() {
+                    [new List<string>() { "shop" }] = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store" }
+                }
+            },
+            { "school",
+                new Dictionary<List<string>, List<string>>()
+                {
+                    [new List<string>() { "school" }] = new List<string>() { "school" },
+                }
+            },
+            {
+              "hospital",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() { "amenity", "building" }] = new List<string>() { "clinic", "hospital" },
+               }
+            },
+            {
+               "kindergarten",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() { "amenity", "building" }] = new List<string>() { "kindergarten" },
+
+               }
+            },
+        };
         /// <summary>
         /// Инициализирует облако тегов для фильтра
         /// </summary>
@@ -122,7 +151,7 @@ namespace MapLibrary
         /// </summary>
         /// <param name="dict">Массив с тегами для выборки</param>
         /// <returns>Строка запроса</returns>
-        public string BuildQueryFilter(/*Dictionary<List<string>, List<string>> dict*/)
+        public string BuildQueryFilter()
         {
             string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
             string endStr = ");out center;out;";
@@ -152,7 +181,7 @@ namespace MapLibrary
                     {
                         nodeWayStr += listValue + "|";
                     }
-                    nodeWayStr.Remove(nodeWayStr.Length - 1);
+                    nodeWayStr = nodeWayStr.Remove(nodeWayStr.Length - 1,1);
                     nodeWayStr += "\"](area);";
                     str += "node" + nodeWayStr;
                     str += "way" + nodeWayStr;
@@ -187,20 +216,7 @@ namespace MapLibrary
         public List<Node> ParseXmlBuildings()
         {
             var requestStream = createRequest(BuildQueryCity());
-
-/*            var queryAllLiveBuildings1 = "area[name = \"Волгоград\"];" +
-                "(" +
-                "way[\"building\" = \"apartments\"](area);" +
-                "way[\"building\" = \"detached\"](area);" +
-                "way[\"building\" = \"house\"](area);" +
-                "); " +
-                "out center; " +
-                "out;";
-            var request = WebRequest.Create(
-                "https://overpass-api.de/api/interpreter?data=" + queryAllLiveBuildings1);
-            request.Method = "GET";
-            var requestStream = request.GetResponse().GetResponseStream();*/
-        var list = new List<Node>();
+            var list = new List<Node>();
             using (var reader = XmlReader.Create(requestStream))
             {
                 while (reader.Read())
@@ -220,20 +236,9 @@ namespace MapLibrary
             return list;
         }
 
-        public List<Node> ParseXmlShops()
+        public List<Node> ParseXmlFilter()
         {
-            var queryAllLiveBuildings = "area[name=\"Волгоград\"];" +
-                "(" +
-                "node[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
-                "way[\"shop\" ~ \"supermarket|convenience|mall|general|department_store\"](area);" +
-                "); " +
-                "out center; " +
-                "out;";
-
-            var request = WebRequest.Create(
-                "https://overpass-api.de/api/interpreter?data=" + queryAllLiveBuildings);
-            request.Method = "GET";
-            var requestStream = request.GetResponse().GetResponseStream();
+            var requestStream = createRequest(BuildQueryFilter());
             var ways = new List<Node>();
             using (var reader = XmlReader.Create(requestStream))
             {
@@ -329,15 +334,24 @@ namespace MapLibrary
         public List<HeatmapElement> calculateHeatmap()
         {
             var buildings = ParseXmlBuildings();
-            var shops = ParseXmlShops();
-            return CalkHeatmap(ParseXmlBuildings(), ParseXmlShops());
+            var shops = ParseXmlFilter();
+            return CalkHeatmap(ParseXmlBuildings(), ParseXmlFilter());
         }
 
         public double[][] calculateHeatmapArray()
         {
             var buildings = ParseXmlBuildings();
-            var shops = ParseXmlShops();
-            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlShops());
+            var shops = ParseXmlFilter();
+            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
+        }
+
+        public void getCSV(string pathCsvFile = "D:\\test.csv")
+        {
+            using (var writer = new StreamWriter(pathCsvFile))
+            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            {
+                csv.WriteRecords(calculateHeatmap());
+            }
         }
 
         public double calculateTheDistance(Center c1, Center c2)

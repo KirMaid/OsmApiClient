@@ -46,7 +46,34 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            //calculator.
+        }
+
+        [Test]
+        public void ParseXmlFilter()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setFilter(new List<string>() { "shop" });
+            var test = calculator.ParseXmlFilter();
+            Assert.IsNull(test);
+        }
+
+        [Test]
+        public void BuildQueryFilter()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setFilter(new List<string>() { "shop"});
+
+            Assert.IsNull(calculator.BuildQueryFilter());
+        }
+        [Test]
+        public void getCSV()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setFilter(new List<string>() { "shop" });
+            calculator.getCSV();
         }
 
 
