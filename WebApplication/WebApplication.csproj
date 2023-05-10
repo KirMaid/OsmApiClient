@@ -9,4 +9,8 @@
     <Folder Include="resources\css\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MapLibrary\MapLibrary.csproj" />
+  </ItemGroup>
+
 </Project>

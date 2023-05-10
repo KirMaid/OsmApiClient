@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using MapLibrary;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace WebApplication.Pages
     {
         public IActionResult Index()
         {
+            MapCalculator calculator = new MapCalculator();
             MapLibrary map = new MapLibrary();
             var result = map.calculateHeatmapArray();
             return View(result);

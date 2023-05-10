@@ -17,13 +17,16 @@ namespace MapLibrary
         private string City;
         private string cityRequest;
         private string filterRequest;
+        double[][] heatmap;
         //private string filterKey = "shop";
-        private List<string> filterKey = new List<string>(); //{ "school", "shop", "hospital", "kindergarten"};
+        private List<string> filterKey;// = new List<string>(); //{ "school", "shop", "hospital", "kindergarten"};
 
-        public MapCalculator(string format = "array", string apiAddress = "overpass-api.de")
+        public MapCalculator(string format = "array", string apiAddress = "overpass-api.de", List<string> filterKey = null, string City = null)
         {
+            //filterKey = new List<string>(filterKey);
             this.format = format;
             this.apiAddress = apiAddress;
+            this.City = City;
         }
 
         public void setApiAddress(string apiAddress)
@@ -264,6 +267,11 @@ namespace MapLibrary
             return ways;
         }
 
+        /// <summary>
+        /// Функция получает из XML область и преобразует её в точку со следующими параметрами: id, координаты центра и все теги.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns>Объект точки</returns>
         private static Node GetWay(XmlReader reader)
         {
             var attributes = AttributesToDictionary(reader);
@@ -294,13 +302,17 @@ namespace MapLibrary
             };
         }
 
+        /// <summary>
+        /// Функция получает из XML точку и её основные параметры: id, координаты центра и все теги.
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns>Объект точки</returns>
         private static Node GetNode(XmlReader reader)
         {
             var attributes = AttributesToDictionary(reader);
             Center center = new Center();
             var tags = new List<Tag>();
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
-
             while (reader.Read() && reader.Name != NodeName)
             {
                 switch (reader.Name)
@@ -321,6 +333,11 @@ namespace MapLibrary
             };
         }
 
+        /// <summary>
+        /// Функция
+        /// </summary>
+        /// <param name="reader"></param>
+        /// <returns>Список атрибутов</returns>
         private static Dictionary<string, string> AttributesToDictionary(XmlReader reader)
         {
             var attributes = new Dictionary<string, string>();
@@ -331,18 +348,45 @@ namespace MapLibrary
             return attributes;
         }
 
-        public List<HeatmapElement> calculateHeatmap()
+        /// <summary>
+        /// Внутренняя функция для расчёта тепловой карты
+        /// </summary>
+        /// <returns>Массив точек с коэффициентом тепловой карты</returns>
+        private List<HeatmapElement> calculateHeatmapList()
         {
-            var buildings = ParseXmlBuildings();
-            var shops = ParseXmlFilter();
             return CalkHeatmap(ParseXmlBuildings(), ParseXmlFilter());
         }
 
-        public double[][] calculateHeatmapArray()
+        /// <summary>
+        /// Основная функция для расчёта тепловой карты
+        /// </summary>
+        /// <returns>Возвращает успешность расчёта</returns>
+        public Boolean calculateHeatmap()
         {
-            var buildings = ParseXmlBuildings();
-            var shops = ParseXmlFilter();
-            return CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
+            switch (format)
+            {
+                case "array":
+                    return calculateHeatmapArray();
+                case "csv":
+                    getCSV();
+                    return true;
+                default:
+                    throw new Exception("Не выбран формат возвращаемых данных");
+            }
+        }
+
+        public Boolean calculateHeatmapArray()
+        {
+            try
+            {
+                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
+            }
+            catch (Exception e)
+            {
+                //LogError(e, "Ошибка при записи или расчёте");
+                throw;
+            }
+            return true;
         }
 
         public void getCSV(string pathCsvFile = "D:\\test.csv")
@@ -350,7 +394,7 @@ namespace MapLibrary
             using (var writer = new StreamWriter(pathCsvFile))
             using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
             {
-                csv.WriteRecords(calculateHeatmap());
+                csv.WriteRecords(calculateHeatmapList());
             }
         }
 
@@ -413,9 +457,9 @@ namespace MapLibrary
             return list;
         }
 
-        public double[][] CalkHeatmapArray(List<Node> addreses, List<Node> filter)
+        public void CalkHeatmapArray(List<Node> addreses, List<Node> filter)
         {
-            double[][] array = new double[addreses.Count][];
+            heatmap = new double[addreses.Count][];
             NumberFormatInfo MyFormat = new System.Globalization.NumberFormatInfo();
             MyFormat.NumberDecimalSeparator = ".";
             int i = 0;
@@ -442,11 +486,10 @@ namespace MapLibrary
                             score += 0.1;
                     }
                 }
-                array[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
+                heatmap[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
                 score = 0.0;
                 i++;
             }
-            return array;
         }
     }
 
