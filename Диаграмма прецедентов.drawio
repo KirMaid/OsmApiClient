@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2023-05-24T06:28:58.591Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="7o1sfpUS8FQqk7vAuhxY" version="21.3.3" type="github">
+<mxfile host="app.diagrams.net" modified="2023-05-24T06:29:08.020Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="hrNYh_MOCBDqD0NAExSp" version="21.3.3" type="github">
   <diagram name="Страница 1" id="cysYTuZrdJdEyRGJLU3K">
     <mxGraphModel dx="989" dy="549" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
@@ -73,9 +73,6 @@
         </mxCell>
         <mxCell id="POdiIXYb0vxU6CHdMYXj-9" value="Выбор формата выходных данных&amp;nbsp; &amp;nbsp;" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="530" y="140" width="140" height="70" as="geometry" />
-        </mxCell>
-        <mxCell id="POdiIXYb0vxU6CHdMYXj-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="390" y="320" width="120" height="60" as="geometry" />
         </mxCell>
         <mxCell id="POdiIXYb0vxU6CHdMYXj-14" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Диаграмма прецедентов использования модуля&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
           <mxGeometry x="200" y="80" width="510" height="30" as="geometry" />
