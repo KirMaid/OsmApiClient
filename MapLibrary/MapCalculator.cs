@@ -13,35 +13,39 @@ namespace MapLibrary
     {
         private const string WayName = "way";
         private const string NodeName = "node";
-        private string format;
-        private string apiAddress;
+        //private string format;
+        //private string apiAddress;
         private string City;
         private string cityRequest;
         private string filterRequest;
+        private bool withBD = false;
         double[][] heatmapArr;
         string heatmapJSON;
+        private OverpassAPIConnector overpassAPI= null;
+
+
         //private string filterKey = "shop";
         private List<string> filterKey;// = new List<string>(); //{ "school", "shop", "hospital", "kindergarten"};
 
         public MapCalculator(
-            string format = "array", 
             string apiAddress = "overpass-api.de", 
             List<string> filterKey = null, 
             string City = null
             )
         {
+            this.overpassAPI = new OverpassAPIConnector(apiAddress);
             filterKey = new List<string>(filterKey);
-            this.format = format;
-            this.apiAddress = apiAddress;
+            //this.apiAddress = apiAddress;
             this.City = City;
         }
 
         public void setApiAddress(string apiAddress)
         {
-            this.apiAddress = apiAddress;
+            overpassAPI.setApiAddress(apiAddress);
+            //this.apiAddress = apiAddress;
         }
 
-        public void setJsonFormat()
+/*        public void setJsonFormat()
         {
             this.format = "json";
         }
@@ -54,7 +58,7 @@ namespace MapLibrary
         public void setArrayFormat()
         {
             this.format = "array";
-        }
+        }*/
 
         public void setCity(string City)
         {
@@ -95,6 +99,14 @@ namespace MapLibrary
 
                }
             },
+             {
+               "bus_stop",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() {"highway"}] = new List<string>() { "bus_stop" },
+
+               }
+            },
         };
         /// <summary>
         /// Инициализирует облако тегов для фильтра
@@ -130,7 +142,13 @@ namespace MapLibrary
                });
         }
 
-
+        /// <summary>
+        /// Служит для ручного добавления значений в фильтр значений
+        /// </summary>
+        public void addTag(string nameTag,Dictionary<List<string>, List<string>> keyAndValues)
+        {
+            dictTags.Add(nameTag,keyAndValues);
+        }
 
         /// <summary>
         /// Метод выставляет переменную фильтра
@@ -156,7 +174,12 @@ namespace MapLibrary
             }
         }
 
-        /// <summary>
+        public void setDistanceAndCoef()
+        {
+
+        }
+
+        /* /// <summary>
         /// Построитель строки запроса фильтра к Overpass API
         /// </summary>
         /// <param name="dict">Массив с тегами для выборки</param>
@@ -171,14 +194,14 @@ namespace MapLibrary
             }
             str = str + endStr;
             return str;
-        }
+        }*/
 
         /// <summary>
         /// Построитель запроса для одной категории фильтра
         /// </summary>
         /// <param name="dict">Теги для фильтра</param>
         /// <returns></returns>
-        public string QueryFilter(Dictionary<List<string>, List<string>> dict)
+        /* public string QueryFilter(Dictionary<List<string>, List<string>> dict)
         {
             string str = "";
             foreach (var el in dict)
@@ -198,13 +221,13 @@ namespace MapLibrary
                 }
             }
             return str;
-        }
+        }*/
 
         /// <summary>
         /// Построитель строки запроса зданий к Overpass API
         /// </summary>
         /// <returns>Строка запроса</returns>
-        public string BuildQueryCity()
+        /*        public string BuildQueryCity()
         {
             string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
             string endStr = ");out center;out;";
@@ -214,18 +237,18 @@ namespace MapLibrary
             }
             str = str + endStr;
             return str;
-        }
+        }*/
 
-        public System.IO.Stream createRequest(string request)
+        /*        public Stream createRequest(string request)
         {
             var webRequest = WebRequest.Create(request);
             webRequest.Method = "GET";
             return webRequest.GetResponse().GetResponseStream();
-        }
+        }*/
 
         public List<Node> ParseXmlBuildings()
         {
-            var requestStream = createRequest(BuildQueryCity());
+            var requestStream = overpassAPI.createRequest(overpassAPI.BuildQueryCity(City,buildingsTags));
             var list = new List<Node>();
             using (var reader = XmlReader.Create(requestStream))
             {
@@ -248,7 +271,7 @@ namespace MapLibrary
 
         public List<Node> ParseXmlFilter()
         {
-            var requestStream = createRequest(BuildQueryFilter());
+            var requestStream = overpassAPI.createRequest(overpassAPI.BuildQueryFilter(City,dictTags));
             var ways = new List<Node>();
             using (var reader = XmlReader.Create(requestStream))
             {
@@ -359,67 +382,12 @@ namespace MapLibrary
         /// Внутренняя функция для расчёта тепловой карты
         /// </summary>
         /// <returns>Массив точек с коэффициентом тепловой карты</returns>
-        private List<HeatmapElement> calculateHeatmapList()
+        private HeatmapElements calculateHeatmapList()
         {
-            return CalkHeatmap(ParseXmlBuildings(), ParseXmlFilter());
+            return CalkHeatmap(ParseXmlBuildings(), ParseXmlFilter(),new DistanceParams());
         }
 
-        /// <summary>
-        /// Основная функция для расчёта тепловой карты
-        /// </summary>
-        /// <returns>Возвращает успешность расчёта</returns>
-        public Boolean calculateHeatmap()
-        {
-            switch (format)
-            {
-                case "array":
-                    return calculateHeatmapArray();
-                case "csv":
-                    getCSV();
-                    return true;
-                case "json":
-                    return getJSON();
-                    return true;
-                default:
-                    throw new Exception("Не выбран формат возвращаемых данных");
-            }
-        }
-
-        private string getJSON()
-        {
-            return JsonSerializer.Serialize(calculateHeatmapList());
-        }
-
-        public Boolean calculateHeatmapArray()
-        {
-            try
-            {
-                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
-            }
-            catch (Exception e)
-            {
-                //LogError(e, "Ошибка при записи или расчёте");
-                throw;
-            }
-            return true;
-        }
-
-        public void getCSV(string pathCsvFile = "D:\\test.csv")
-        {
-            try
-            {
-                using (var writer = new StreamWriter(pathCsvFile))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
-                {
-                    csv.WriteRecords(calculateHeatmapList());
-                }
-            }
-            catch (Exception e)
-            {
-                throw;
-            }
-        }
-
+       
         public double calculateTheDistance(Center c1, Center c2)
         {
             // перевести координаты в радианы
@@ -446,7 +414,7 @@ namespace MapLibrary
             return dist;
         }
 
-        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
+        public HeatmapElements CalkHeatmapParams(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
         {
             var list = new List<HeatmapElement>();
             foreach (Node node in addreses)
@@ -474,13 +442,92 @@ namespace MapLibrary
                 list.Add(heatmapElement);
                 score = 0.0;
             }
-            return list;
+            return new HeatmapElements(list);
+        }
+
+        public HeatmapElements CalkHeatmap(List<Node> addreses, List<Node> filter, DistanceParams filterParams)
+        {
+            var list = new List<HeatmapElement>();
+            foreach (Node node in addreses)
+            {
+                HeatmapElement heatmapElement = new HeatmapElement();
+                heatmapElement.Center = node.Center;
+                var score = 0.0;
+                var coef = 1 / (filter.Count * filterParams.countObjects);
+                foreach (Node nodeFilter in filter)
+                {
+                    var dist = calculateTheDistance(node.Center, nodeFilter.Center);
+                        if (dist < filterParams.distance)
+                        {
+                            if (score > (1 - coef))
+                            {
+                                score = 1;
+                            }
+                            else
+                                score += coef;
+                        }
+                }
+                heatmapElement.Coefficient = score;
+                list.Add(heatmapElement);
+                score = 0.0;
+            }
+            return new HeatmapElements(list);
+        }
+
+
+        /// <summary>
+        /// Основная функция для расчёта тепловой карты
+        /// </summary>
+        /// <returns>Возвращает успешность расчёта</returns>
+  /*      public Boolean calculateHeatmap()
+        {
+            switch (format)
+            {
+                case "array":
+                    return calculateHeatmapArray();
+                case "csv":
+                    getCSV();
+                    return true;
+                case "json":
+                    return getJSON();
+                    return true;
+                default:
+                    throw new Exception("Не выбран формат возвращаемых данных");
+            }
+        }
+
+        public Boolean calculateHeatmapArray()
+        {
+            try
+            {
+                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
+            }
+            catch (Exception e)
+            {
+                //LogError(e, "Ошибка при записи или расчёте");
+                throw;
+            }
+            return true;
+        }
+
+        public Boolean calculateHeatmapArray()
+        {
+            try
+            {
+                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
+            }
+            catch (Exception e)
+            {
+                //LogError(e, "Ошибка при записи или расчёте");
+                throw;
+            }
+            return true;
         }
 
         public void CalkHeatmapArray(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
         {
             heatmapArr = new double[addreses.Count][];
-            NumberFormatInfo MyFormat = new System.Globalization.NumberFormatInfo();
+            NumberFormatInfo MyFormat = new NumberFormatInfo();
             MyFormat.NumberDecimalSeparator = ".";
             int i = 0;
             foreach (Node node in addreses)
@@ -508,7 +555,7 @@ namespace MapLibrary
                 score = 0.0;
                 i++;
             }
-        }
+        }*/
     }
 
     public class Node
@@ -540,6 +587,124 @@ namespace MapLibrary
     {
         public int distance;
         public double coefficient;
+        public int countObjects;
+    }
+
+    public class HeatmapElements
+    {
+        private List<HeatmapElement> elements;
+        public HeatmapElements(List<HeatmapElement> elements)
+        {
+            this.elements = elements;
+        }
+        public void getCSV(string pathCsvFile = "D:\\test.csv")
+        {
+            try
+            {
+                using (var writer = new StreamWriter(pathCsvFile))
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteRecords(elements);
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
+        }
+        public string getJSON()
+        {
+            return JsonSerializer.Serialize(elements);
+        }
+
+        public List <HeatmapElement> getList()
+        {
+            return elements;
+        }
+
+        public void
+    }
+
+    public class OverpassAPIConnector
+    {
+        private string apiAddress;
+        private List<string> filterKey;
+        public OverpassAPIConnector(string apiAddress)
+        {
+            this.apiAddress = apiAddress;
+        }
+
+        public Stream createRequest(string request)
+        {
+            var webRequest = WebRequest.Create(request);
+            webRequest.Method = "GET";
+            return webRequest.GetResponse().GetResponseStream();
+        }
+
+        public void setApiAddress(string apiAddress)
+        {
+            this.apiAddress = apiAddress;
+        }
+
+        /// <summary>
+        /// Построитель строки запроса фильтра к Overpass API
+        /// </summary>
+        /// <param name="dict">Массив с тегами для выборки</param>
+        /// <returns>Строка запроса</returns>
+        public string BuildQueryFilter(string City, Dictionary<string, Dictionary<List<string>, List<string>>> dictTags)
+        {
+            string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
+            string endStr = ");out center;out;";
+            foreach (var el in filterKey)
+            {
+                str += QueryFilter(dictTags[el]);
+            }
+            str = str + endStr;
+            return str;
+        }
+
+        /// <summary>
+        /// Построитель запроса для одной категории фильтра
+        /// </summary>
+        /// <param name="dict">Теги для фильтра</param>
+        /// <returns></returns>
+        public string QueryFilter(Dictionary<List<string>, List<string>> dict)
+        {
+            string str = "";
+            foreach (var el in dict)
+            {
+                string nodeWayStr = "";
+                foreach (string listKey in el.Key)
+                {
+                    nodeWayStr += $"[\"{listKey}\" ~ \"";
+                    foreach (string listValue in el.Value)
+                    {
+                        nodeWayStr += listValue + "|";
+                    }
+                    nodeWayStr = nodeWayStr.Remove(nodeWayStr.Length - 1, 1);
+                    nodeWayStr += "\"](area);";
+                    str += "node" + nodeWayStr;
+                    str += "way" + nodeWayStr;
+                }
+            }
+            return str;
+        }
+
+        /// <summary>
+        /// Построитель строки запроса зданий к Overpass API
+        /// </summary>
+        /// <returns>Строка запроса</returns>
+        public string BuildQueryCity(string City,List<string> buildingsTags)
+        {
+            string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
+            string endStr = ");out center;out;";
+            foreach (var el in buildingsTags)
+            {
+                str += $"way[\"building\" = \"{el}\"](area);";
+            }
+            str = str + endStr;
+            return str;
+        }
     }
 }
 
