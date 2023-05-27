@@ -6,9 +6,6 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
-/*using OsmSharp;
-using OsmSharp.API;
-using OsmSharp.IO.API;*/
 
 namespace WebApplication
 {
@@ -19,8 +16,6 @@ namespace WebApplication
 
         public List<HeatmapElement> calculateHeatmap()
         {
-            var buildings = ParseXmlBuildings();
-            var shops = ParseXmlShops();
             return CalkHeatmap(ParseXmlBuildings(), ParseXmlShops());
         }
 
@@ -57,7 +52,7 @@ namespace WebApplication
             return dist;
         }
 
-        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter)
+        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
         {
             var list = new List<HeatmapElement>();
             foreach (Node node in addreses)
@@ -68,19 +63,18 @@ namespace WebApplication
                 foreach (Node nodeFilter in filter)
                 {
                     var dist = calculateTheDistance(node.Center, nodeFilter.Center);
-                    if (dist < 200 && score < 1)
+
+                    foreach (DistanceParams filterParam in filterParams)
                     {
-                        if(score > 0.75)
-                            score = 1;
-                        else
-                            score += 0.25;
-                    }
-                    if (dist < 500 && score < 1)
-                    {
-                        if (score > 0.9)
-                            score = 1;
-                        else
-                            score += 0.1;
+                        if(dist < filterParam.distance)
+                        {
+                            if(score > (1 - filterParam.coefficient))
+                            {
+                                score = 1;
+                            }
+                            else
+                                score += filterParam.coefficient;
+                        }
                     }
                 }
                 heatmapElement.Coefficient = score;
@@ -305,5 +299,11 @@ namespace WebApplication
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+    }
+
+    public class DistanceParams
+    {
+        public int distance;
+        public double coefficient;
     }
 }

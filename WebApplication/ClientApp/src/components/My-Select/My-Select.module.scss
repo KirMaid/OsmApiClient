@@ -1,0 +1,37 @@
+
+.select {
+    position: relative;
+}
+
+.current {
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.options {
+    position: absolute;
+    z-index: 1500;
+    background-color: #ffffff;
+    min-height: 100px;
+    border: 1px solid black;
+    max-height: 50vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+
+    &__item {
+        cursor: pointer;
+
+        & > * {
+            padding: 10px 1rem;
+            white-space: nowrap;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        &:hover {
+            background-color: #f1f1f1;
+        }
+     }
+}

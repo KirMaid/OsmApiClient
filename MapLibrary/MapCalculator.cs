@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Net;
+using System.Text.Json;
 using System.Xml;
 
 namespace MapLibrary
@@ -17,13 +18,19 @@ namespace MapLibrary
         private string City;
         private string cityRequest;
         private string filterRequest;
-        double[][] heatmap;
+        double[][] heatmapArr;
+        string heatmapJSON;
         //private string filterKey = "shop";
         private List<string> filterKey;// = new List<string>(); //{ "school", "shop", "hospital", "kindergarten"};
 
-        public MapCalculator(string format = "array", string apiAddress = "overpass-api.de", List<string> filterKey = null, string City = null)
+        public MapCalculator(
+            string format = "array", 
+            string apiAddress = "overpass-api.de", 
+            List<string> filterKey = null, 
+            string City = null
+            )
         {
-            //filterKey = new List<string>(filterKey);
+            filterKey = new List<string>(filterKey);
             this.format = format;
             this.apiAddress = apiAddress;
             this.City = City;
@@ -370,9 +377,17 @@ namespace MapLibrary
                 case "csv":
                     getCSV();
                     return true;
+                case "json":
+                    return getJSON();
+                    return true;
                 default:
                     throw new Exception("Не выбран формат возвращаемых данных");
             }
+        }
+
+        private string getJSON()
+        {
+            return JsonSerializer.Serialize(calculateHeatmapList());
         }
 
         public Boolean calculateHeatmapArray()
@@ -391,10 +406,17 @@ namespace MapLibrary
 
         public void getCSV(string pathCsvFile = "D:\\test.csv")
         {
-            using (var writer = new StreamWriter(pathCsvFile))
-            using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+            try
             {
-                csv.WriteRecords(calculateHeatmapList());
+                using (var writer = new StreamWriter(pathCsvFile))
+                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                {
+                    csv.WriteRecords(calculateHeatmapList());
+                }
+            }
+            catch (Exception e)
+            {
+                throw;
             }
         }
 
@@ -424,7 +446,7 @@ namespace MapLibrary
             return dist;
         }
 
-        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter)
+        public List<HeatmapElement> CalkHeatmap(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
         {
             var list = new List<HeatmapElement>();
             foreach (Node node in addreses)
@@ -435,19 +457,17 @@ namespace MapLibrary
                 foreach (Node nodeFilter in filter)
                 {
                     var dist = calculateTheDistance(node.Center, nodeFilter.Center);
-                    if (dist < 200 && score < 1)
+                    foreach (DistanceParams filterParam in filterParams)
                     {
-                        if (score > 0.75)
-                            score = 1;
-                        else
-                            score += 0.25;
-                    }
-                    if (dist < 500 && score < 1)
-                    {
-                        if (score > 0.9)
-                            score = 1;
-                        else
-                            score += 0.1;
+                        if (dist < filterParam.distance)
+                        {
+                            if (score > (1 - filterParam.coefficient))
+                            {
+                                score = 1;
+                            }
+                            else
+                                score += filterParam.coefficient;
+                        }
                     }
                 }
                 heatmapElement.Coefficient = score;
@@ -457,9 +477,9 @@ namespace MapLibrary
             return list;
         }
 
-        public void CalkHeatmapArray(List<Node> addreses, List<Node> filter)
+        public void CalkHeatmapArray(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
         {
-            heatmap = new double[addreses.Count][];
+            heatmapArr = new double[addreses.Count][];
             NumberFormatInfo MyFormat = new System.Globalization.NumberFormatInfo();
             MyFormat.NumberDecimalSeparator = ".";
             int i = 0;
@@ -471,22 +491,20 @@ namespace MapLibrary
                 foreach (Node nodeFilter in filter)
                 {
                     var dist = calculateTheDistance(node.Center, nodeFilter.Center);
-                    if (dist < 200 && score < 1)
+                    foreach (DistanceParams filterParam in filterParams)
                     {
-                        if (score > 0.75)
-                            score = 1;
-                        else
-                            score += 0.25;
-                    }
-                    if (dist < 500 && score < 1)
-                    {
-                        if (score > 0.9)
-                            score = 1;
-                        else
-                            score += 0.1;
+                        if (dist < filterParam.distance)
+                        {
+                            if (score > (1 - filterParam.coefficient))
+                            {
+                                score = 1;
+                            }
+                            else
+                                score += filterParam.coefficient;
+                        }
                     }
                 }
-                heatmap[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
+                heatmapArr[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
                 score = 0.0;
                 i++;
             }
@@ -516,6 +534,12 @@ namespace MapLibrary
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+    }
+
+    public class DistanceParams
+    {
+        public int distance;
+        public double coefficient;
     }
 }
 

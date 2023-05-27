@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace WebApplication.Pages
 {
+    [ApiController]
+    [Route("[controller]")]
     public class MapController : Controller
     {
-        public IActionResult Index()
+        [HttpGet]
+        public /*IActionResult*/ double[][] Index()
         {
             MapCalculator calculator = new MapCalculator();
             MapLibrary map = new MapLibrary();
-            var result = map.calculateHeatmapArray();
-            return View(result);
+            return /*var result = */ map.calculateHeatmapArray();
+
+            //return View(result);
         }
     }
 }

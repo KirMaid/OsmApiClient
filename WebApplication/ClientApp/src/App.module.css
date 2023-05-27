@@ -1,0 +1,9 @@
+* {
+    box-sizing: border-box;
+}
+
+.map {
+    margin: 0 auto;
+    box-sizing: border-box;
+    overflow: hidden;
+}

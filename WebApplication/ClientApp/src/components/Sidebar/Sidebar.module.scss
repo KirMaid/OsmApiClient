@@ -1,0 +1,25 @@
+.sidebar {
+    position: absolute;
+    z-index: 1500;
+    background-color: #ffffff;
+    padding: 1.5rem;
+    height: 100%;
+}
+
+.sidebar {
+    &__item {
+        margin: 2rem 1rem;
+    }
+    &__title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 1rem;
+    }
+    &__option {
+        margin: 0.5rem 0;
+    }
+    &__company {
+        max-height: 50%;
+        overflow-y: auto;
+    }
+}
