@@ -12,13 +12,13 @@ namespace WebApplication.Pages
     public class MapController : Controller
     {
         [HttpGet]
-        public /*IActionResult*/ double[][] Index()
+        public IActionResult /*double[][]*/ Index()
         {
             MapCalculator calculator = new MapCalculator();
-            MapLibrary map = new MapLibrary();
-            return /*var result = */ map.calculateHeatmapArray();
+            //MapLibrary map = new MapLibrary();
+            //return /*var result = */ map.calculateHeatmapArray();
 
-            //return View(result);
+            return View();
         }
     }
 }

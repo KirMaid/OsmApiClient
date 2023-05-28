@@ -7,7 +7,7 @@ using System.Net.Http;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace WebApplication
+/*namespace WebApplication
 {
     public class MapLibrary
     {
@@ -306,4 +306,4 @@ namespace WebApplication
         public int distance;
         public double coefficient;
     }
-}
+}*/

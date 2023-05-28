@@ -25,7 +25,7 @@ namespace WebApplication.Tests
             }
         }*/
 
-        [Test]
+/*        [Test]
         public void BuildQueryCity()
         {
             MapCalculator calculator = new MapCalculator();
@@ -66,16 +66,36 @@ namespace WebApplication.Tests
             calculator.setFilter(new List<string>() { "shop"});
 
             Assert.IsNull(calculator.BuildQueryFilter());
-        }
+        }*/
         [Test]
         public void getCSV()
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setFilter(new List<string>() { "shop" });
-            calculator.getCSV();
+            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setFilter(new List<string>() { "hospital" });
+            calculator.calculateHeatmap().getCSV();
         }
 
+        [Test]
+        public void ParseXmlBuildings()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setFilter(new List<string>() { "hospital" });
+            Assert.IsNull(calculator.getApiConnector().BuildQueryFilter("Волгоград",calculator.dictTagsChosen));
+        }
+
+        [Test]
+        public void countFilters()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setFilter(new List<string>() { "hospital" });
+            Assert.IsNull(calculator.filterParams.countFilters);
+        }
 
     } 
 };
