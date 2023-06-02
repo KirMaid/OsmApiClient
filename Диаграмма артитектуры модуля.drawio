@@ -1,63 +1,60 @@
-<mxfile host="app.diagrams.net" modified="2023-06-02T17:01:06.650Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="uPIxSB_BFAJyRgZtz0ea" version="21.3.7" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-02T18:21:07.127Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/113.0.0.0 Safari/537.36" etag="Chqu3FTtdPFkIAchO080" version="21.3.7" type="github">
   <diagram name="Страница 1" id="CXx4P1_ULokcToh2MMPy">
-    <mxGraphModel dx="2261" dy="1965" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1247" dy="692" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-45" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="-40" y="-40" width="850" height="910" as="geometry" />
-        </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-2" target="EMoeArkeT9Vb19ML9Za9-4" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-2" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
-          <mxGeometry x="60" y="755" width="30" height="60" as="geometry" />
+          <mxGeometry x="60" y="1225" width="30" height="60" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-4" target="EMoeArkeT9Vb19ML9Za9-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-4" value="ГИС" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="190" y="760" width="110" height="50" as="geometry" />
+          <mxGeometry x="190" y="1230" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-5" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-7" target="EMoeArkeT9Vb19ML9Za9-9" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="530" y="785" />
-              <mxPoint x="530" y="785" />
+              <mxPoint x="530" y="1255" />
+              <mxPoint x="530" y="1255" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-7" target="EMoeArkeT9Vb19ML9Za9-4" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="430" y="740" />
-              <mxPoint x="245" y="740" />
+              <mxPoint x="430" y="1210" />
+              <mxPoint x="245" y="1210" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-7" value="Модуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="380" y="760" width="110" height="50" as="geometry" />
+          <mxGeometry x="380" y="1230" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-9" target="EMoeArkeT9Vb19ML9Za9-7" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-9" value="&amp;nbsp;База картографических объектов" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="570" y="760" width="110" height="50" as="geometry" />
+          <mxGeometry x="570" y="1230" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-10" value="Подключается как библиотека" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="179" y="300" width="180" height="30" as="geometry" />
+          <mxGeometry x="375" y="442" width="180" height="30" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-14" target="ETxMw0fx0YGiLK-2AQWM-1" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="550" y="120" />
-              <mxPoint x="550" />
-              <mxPoint x="35" />
+              <mxPoint x="746" y="262" />
+              <mxPoint x="746" y="142" />
+              <mxPoint x="231" y="142" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-14" value="ГИС" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="380" y="95" width="110" height="50" as="geometry" />
+          <mxGeometry x="576" y="237" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.25;entryY=0;entryDx=0;entryDy=0;exitX=0.25;exitY=1;exitDx=0;exitDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-16" target="EMoeArkeT9Vb19ML9Za9-28" edge="1">
           <mxGeometry relative="1" as="geometry">
@@ -65,47 +62,41 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-16" value="&amp;nbsp;База картографических объектов" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="130" y="20" width="110" height="50" as="geometry" />
-        </mxCell>
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-18" target="EMoeArkeT9Vb19ML9Za9-20" edge="1">
-          <mxGeometry relative="1" as="geometry" />
-        </mxCell>
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-18" value="Пользователь" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;" parent="1" vertex="1">
-          <mxGeometry x="50" y="370" width="30" height="60" as="geometry" />
+          <mxGeometry x="326" y="162" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-20" target="EMoeArkeT9Vb19ML9Za9-23" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="185" y="325" />
+              <mxPoint x="381" y="467" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-20" value="Приложение" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="130" y="375" width="110" height="50" as="geometry" />
+          <mxGeometry x="326" y="517" width="110" height="85" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-23" target="EMoeArkeT9Vb19ML9Za9-25" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-22" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-23" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="200" y="370" as="targetPoint" />
+            <mxPoint x="396" y="512" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.243;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-23" target="EMoeArkeT9Vb19ML9Za9-40" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="396" y="300" />
+              <mxPoint x="592" y="442" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-23" value="Модуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="359" y="300" width="110" height="50" as="geometry" />
+          <mxGeometry x="555" y="442" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-24" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-25" target="EMoeArkeT9Vb19ML9Za9-23" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-25" value="&amp;nbsp;База картографических объектов" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="570" y="300" width="110" height="50" as="geometry" />
+          <mxGeometry x="766" y="442" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-26" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-28" target="EMoeArkeT9Vb19ML9Za9-14" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -120,124 +111,259 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-28" value="Модуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="130" y="95" width="110" height="50" as="geometry" />
+          <mxGeometry x="326" y="237" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-29" value="Результат расчёта в виде файла" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="250" y="90" width="120" height="30" as="geometry" />
+          <mxGeometry x="446" y="232" width="120" height="30" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-31" value="Отрисовка тепловой карты средствами ГИС" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="400" y="10" width="140" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-32" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-33" target="EMoeArkeT9Vb19ML9Za9-34" edge="1">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points">
-              <mxPoint x="400" y="400" />
-              <mxPoint x="400" y="400" />
-            </Array>
-          </mxGeometry>
-        </mxCell>
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-33" value="Отрисовка тепловой карты средствами приложения" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="240" y="370" width="380" height="30" as="geometry" />
-        </mxCell>
-        <mxCell id="EMoeArkeT9Vb19ML9Za9-34" value="" style="ellipse;html=1;shape=endState;fillColor=#000000;strokeColor=#ff0000;" parent="1" vertex="1">
-          <mxGeometry x="650" y="385" width="30" height="30" as="geometry" />
+          <mxGeometry x="596" y="152" width="140" height="30" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-39" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.645;entryY=0.96;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-35" target="EMoeArkeT9Vb19ML9Za9-28" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-35" value="&lt;br&gt;БД с геоданными" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="150" y="170" width="70" height="70" as="geometry" />
+          <mxGeometry x="346" y="312" width="70" height="70" as="geometry" />
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-42" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.757;exitY=0.986;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="EMoeArkeT9Vb19ML9Za9-40" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="430" y="300" as="targetPoint" />
+            <mxPoint x="626" y="442" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="430" y="260" />
-              <mxPoint x="430" y="300" />
+              <mxPoint x="626" y="402" />
+              <mxPoint x="626" y="442" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="EMoeArkeT9Vb19ML9Za9-40" value="&lt;br&gt;БД с геоданными" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.database;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="379" y="190" width="70" height="70" as="geometry" />
+          <mxGeometry x="575" y="332" width="70" height="70" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-2" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="ETxMw0fx0YGiLK-2AQWM-1" target="EMoeArkeT9Vb19ML9Za9-28" edge="1">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="110" y="133" />
+              <mxPoint x="306" y="275" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-1" value="Пользователь" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="-30" y="95" width="110" height="50" as="geometry" />
+          <mxGeometry x="166" y="237" width="110" height="50" as="geometry" />
         </mxCell>
         <mxCell id="3_jJkb1iXmk9x0ODjTXM-3" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="ETxMw0fx0YGiLK-2AQWM-5" target="ETxMw0fx0YGiLK-2AQWM-6">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-5" value="Пользователь" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="-20" y="550" width="110" height="80" as="geometry" />
+          <mxGeometry x="56" y="681" width="110" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" parent="1" source="ETxMw0fx0YGiLK-2AQWM-6" edge="1" target="ETxMw0fx0YGiLK-2AQWM-5">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="100" y="600" as="targetPoint" />
+            <mxPoint x="176" y="731" as="targetPoint" />
             <Array as="points" />
           </mxGeometry>
         </mxCell>
         <mxCell id="3_jJkb1iXmk9x0ODjTXM-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0.018;entryY=0.138;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="ETxMw0fx0YGiLK-2AQWM-6" target="ETxMw0fx0YGiLK-2AQWM-11">
           <mxGeometry relative="1" as="geometry">
             <Array as="points">
-              <mxPoint x="340" y="560" />
-              <mxPoint x="469" y="560" />
-              <mxPoint x="469" y="561" />
+              <mxPoint x="416" y="691" />
+              <mxPoint x="545" y="691" />
+              <mxPoint x="545" y="692" />
             </Array>
           </mxGeometry>
         </mxCell>
-        <mxCell id="ETxMw0fx0YGiLK-2AQWM-6" value="Android&amp;nbsp; приложение" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="230" y="550" width="110" height="80" as="geometry" />
+        <mxCell id="ETxMw0fx0YGiLK-2AQWM-6" value="&amp;nbsp; Android/Desktop приложение" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
+          <mxGeometry x="306" y="681" width="110" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-9" value="Ввод параметров для расчёта" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="110" y="530" width="105" height="30" as="geometry" />
+          <mxGeometry x="186" y="661" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-10" value="Показ тепловой карты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="110" y="575" width="105" height="30" as="geometry" />
+          <mxGeometry x="186" y="706" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-17" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" parent="1" source="ETxMw0fx0YGiLK-2AQWM-11" target="ETxMw0fx0YGiLK-2AQWM-16" edge="1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="3_jJkb1iXmk9x0ODjTXM-4" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="ETxMw0fx0YGiLK-2AQWM-11">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="340" y="620" as="targetPoint" />
+            <mxPoint x="416" y="751" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="469" y="620" />
-              <mxPoint x="340" y="620" />
+              <mxPoint x="545" y="751" />
+              <mxPoint x="416" y="751" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-11" value="Модуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="469" y="550" width="110" height="80" as="geometry" />
+          <mxGeometry x="545" y="681" width="110" height="80" as="geometry" />
         </mxCell>
-        <mxCell id="ETxMw0fx0YGiLK-2AQWM-13" value="Подключение как библиотеки" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="350" y="530" width="105" height="30" as="geometry" />
+        <mxCell id="ETxMw0fx0YGiLK-2AQWM-13" value="Подключается как библиотека" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="426" y="661" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-15" value="Передача данных для отрисовки тепловой карты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="350" y="575" width="105" height="30" as="geometry" />
+          <mxGeometry x="426" y="706" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-18" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" parent="1" source="ETxMw0fx0YGiLK-2AQWM-16" edge="1">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="579" y="620" as="targetPoint" />
+            <mxPoint x="655" y="751" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="680" y="620" />
-              <mxPoint x="579" y="620" />
+              <mxPoint x="756" y="751" />
+              <mxPoint x="655" y="751" />
             </Array>
           </mxGeometry>
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-16" value="Внешний сервер OSM" style="rounded=0;whiteSpace=wrap;html=1;" parent="1" vertex="1">
-          <mxGeometry x="680" y="550" width="120" height="80" as="geometry" />
+          <mxGeometry x="756" y="681" width="120" height="80" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-19" value="Запрос данных по&amp;nbsp; Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="579" y="540" width="105" height="30" as="geometry" />
+          <mxGeometry x="655" y="671" width="105" height="30" as="geometry" />
         </mxCell>
         <mxCell id="ETxMw0fx0YGiLK-2AQWM-21" value="Получение данных по Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="579" y="585" width="105" height="30" as="geometry" />
+          <mxGeometry x="655" y="716" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-12" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-7" target="EMoeArkeT9Vb19ML9Za9-20">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-7" value="Пользователь" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="56" y="517" width="110" height="85" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1.018;entryY=0.929;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="EMoeArkeT9Vb19ML9Za9-20" target="3_jJkb1iXmk9x0ODjTXM-7">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="166" y="592" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="326" y="596" />
+            </Array>
+            <mxPoint x="306" y="592" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-10" value="Ввод параметров для расчёта" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="196" y="501.5" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-11" value="Показ тепловой карты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="196" y="562" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-13" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-14" target="3_jJkb1iXmk9x0ODjTXM-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-14" value="Пользователь" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="56" y="896" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-15" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-17" target="3_jJkb1iXmk9x0ODjTXM-14">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="176" y="946" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.018;entryY=0.138;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" target="3_jJkb1iXmk9x0ODjTXM-22">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="645" y="906" />
+              <mxPoint x="774" y="906" />
+              <mxPoint x="774" y="907" />
+            </Array>
+            <mxPoint x="645" y="907" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-29" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-17" target="3_jJkb1iXmk9x0ODjTXM-32">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="526" y="916" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-17" value="&amp;nbsp; Android/Desktop клиент" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="306" y="896" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-18" value="Ввод параметров для расчёта" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="186" y="876" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-19" value="Показ тепловой карты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="186" y="921" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-22" target="3_jJkb1iXmk9x0ODjTXM-26">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-21" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-22">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="645" y="966" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="774" y="966" />
+              <mxPoint x="645" y="966" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-22" value="Модуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="774" y="896" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-23" value="Подключается как библиотека" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="655" y="876" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-24" value="Передача данных для отрисовки тепловой карты" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="655" y="921" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-25" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-26">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="884" y="966" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="985" y="966" />
+              <mxPoint x="884" y="966" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-26" value="Внешний сервер OSM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="985" y="896" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-27" value="Запрос данных по&amp;nbsp; Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="884" y="886" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-28" value="Получение данных по Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="884" y="931" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-30" value="Отправка данных по REST API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="426" y="886" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-31" value="Получение данных по REST API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="418.5" y="921" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-33" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-32" target="3_jJkb1iXmk9x0ODjTXM-17">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-32" value="Сервер (ASP. .NET)" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="535" y="896" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-34" value="Подмодуль расчёта тепловой карты" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="908" y="1470" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-35" value="Подмодуль запроса картографических данных" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="358" y="1453" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-36" value="Подмодуль XML парсер" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="565" y="1456" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-41" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-37" target="3_jJkb1iXmk9x0ODjTXM-35">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-37" value="Клиентское приложение" style="html=1;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="129" y="1453" width="110" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-42" value="Параметры для расчёта" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="246" y="1461" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-44" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" target="3_jJkb1iXmk9x0ODjTXM-46">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="453.99999999999994" y="1619" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-45" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.75;exitDx=0;exitDy=0;" edge="1" parent="1" source="3_jJkb1iXmk9x0ODjTXM-46">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="453.99999999999994" y="1669" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="555" y="1669" />
+              <mxPoint x="453.99999999999994" y="1669" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-46" value="Внешний сервер OSM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="555" y="1599" width="120" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-47" value="Запрос данных по&amp;nbsp; Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="453.99999999999994" y="1589" width="105" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3_jJkb1iXmk9x0ODjTXM-48" value="Получение данных по Overpass API" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="453.99999999999994" y="1634" width="105" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
