@@ -20,7 +20,7 @@ namespace MapLibrary
         public DistanceParams filterParams;
 
         public MapCalculator(
-            string apiAddress = "overpass-api.de",
+            string apiAddress = "maps.mail.ru/osm/tools/overpass",
             string City = null
             )
         {
@@ -49,11 +49,11 @@ namespace MapLibrary
             return xmlParser;
         }
 
-        List<string> buildingsTags = new List<string>()
+        public List<string> buildingsTags = new List<string>()
         {
             "apartments",
             "detached",
-            "house"
+            "house",
         };
 
         Dictionary<string, Dictionary<List<string>, List<string>>> dictTagsAll = new Dictionary<string, Dictionary<List<string>, List<string>>>() {
@@ -65,7 +65,7 @@ namespace MapLibrary
             { "school",
                 new Dictionary<List<string>, List<string>>()
                 {
-                    [new List<string>() { "school" }] = new List<string>() { "school" },
+                    [new List<string>() { "amenity" }] = new List<string>() { "school" },
                 }
             },
             {
@@ -165,9 +165,9 @@ namespace MapLibrary
             }
         }
 
-        public void setDistanceAndCount(DistanceParams filterParams)
+        public void setDistanceAndCount(int distance,int count, int minCount = 0)
         {
-            this.filterParams = filterParams;
+            this.filterParams = new DistanceParams(distance, count, minCount);
         }
       
 
@@ -246,6 +246,7 @@ namespace MapLibrary
                 heatmapElement.Center = node.Center;
                 var score = 0.0;
                 var coef = 1.0 / (filterParams.countFilters * filterParams.countObjects);
+                var minCoef = coef * filterParams.minCount;
                 foreach (Node nodeFilter in filter)
                 {
                     var dist = calculateTheDistance(node.Center, nodeFilter.Center);
@@ -259,7 +260,10 @@ namespace MapLibrary
                             score += coef;
                     }
                 }
-                heatmapElement.Coefficient = score;
+                if(score < minCoef)
+                    heatmapElement.Coefficient = 0;
+                else
+                    heatmapElement.Coefficient = score;
                 list.Add(heatmapElement);
                 score = 0.0;
             }
@@ -413,15 +417,17 @@ namespace MapLibrary
     {
         //public DistanceParams() { }
 
-        public DistanceParams(int distance, int count)
+        public DistanceParams(int distance, int count, int minCount = 0)
         {
             this.distance = distance;
             this.countObjects = count;
+            this.minCount = minCount;
         }
         public int distance;
         public double coefficient;
         public int countObjects;
         public int countFilters = 0;
+        public int minCount;
     }
 
     public class HeatmapElements

@@ -2,9 +2,13 @@ import React, {useState} from 'react';
 import './App.css'
 import Heatmap from "./components/Heatmap";
 import Sidebar from "./components/Sidebar/Sidebar";
+//import { useSearchParams } from "react-router-dom";
 
 
 const App = () => {
+    //const [searchParams] = useSearchParams();
+
+
     const [cities, setCities] = useState([
         'Волгоград',
         'Москва',
@@ -15,17 +19,19 @@ const App = () => {
 
 
     const [places, setPlaces] = useState([
-        {name: 'Бары', checked: false},
-        {name: 'Кафе', checked: false},
-        {name: 'Рестораны', checked: false},
+        {name: 'Продуктовые магазины', checked: false},
+        {name: 'Больницы', checked: false},
+        { name: 'Школы', checked: true },
+        { name: 'Детские сады', checked: false },
+        { name: 'Остановки', checked: false },
     ]);
     const [methods, setMethods] = useState([
-        'Метод N',
-        'Метод M'
+        'Стандартный расчёт',
+        'Реверс'
     ]);
 
     const [currentCity, setCurrentCity] = useState('Волгоград');
-    const [currentMethod, setCurrentMethod] = useState('Метод M');
+    const [currentMethod, setCurrentMethod] = useState('Стандартный расчёт');
 
     const selectCity = (city) => {
         setCurrentCity(city)

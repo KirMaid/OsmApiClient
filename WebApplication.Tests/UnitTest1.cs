@@ -72,19 +72,30 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setDistanceAndCount(500,5,4);
             calculator.setFilter(new List<string>() { "hospital" });
             calculator.calculateHeatmap().getCSV();
         }
+
+        [Test]
+        public void ParseXmlFilter()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "hospital" });
+            Assert.IsNull(calculator.getApiConnector().BuildQueryFilter("Волгоград",calculator.dictTagsChosen));
+        }
+
 
         [Test]
         public void ParseXmlBuildings()
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setDistanceAndCount(500, 5, 0);
             calculator.setFilter(new List<string>() { "hospital" });
-            Assert.IsNull(calculator.getApiConnector().BuildQueryFilter("Волгоград",calculator.dictTagsChosen));
+            Assert.IsNull(calculator.getApiConnector().BuildQueryCity("Волгоград", calculator.buildingsTags));
         }
 
         [Test]
@@ -92,7 +103,7 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(new DistanceParams(500, 5));
+            calculator.setDistanceAndCount(500, 5, 0);
             calculator.setFilter(new List<string>() { "hospital" });
             Assert.IsNull(calculator.filterParams.countFilters);
         }
