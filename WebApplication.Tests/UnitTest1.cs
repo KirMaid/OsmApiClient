@@ -95,7 +95,10 @@ namespace WebApplication.Tests
             calculator.setCity("Волгоград");
             calculator.setDistanceAndCount(500, 5, 0);
             calculator.setFilter(new List<string>() { "hospital" });
-            Assert.IsNull(calculator.getApiConnector().BuildQueryCity("Волгоград", calculator.buildingsTags));
+            //Assert.IsNull(calculator.getApiConnector().BuildQueryCity("Волгоград", calculator.buildingsTags));
+            List<Node> nodes = calculator.getXmlParser().ParseXmlBuildings("Волгоград", calculator.buildingsTags);
+            Assert.IsNull(calculator.getXmlParser().ParseXmlBuildings("Волгоград", calculator.buildingsTags));
+            //Assert.IsNull(calculator.getApiConnector().Pars);
         }
 
         [Test]
@@ -103,9 +106,18 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setDistanceAndCount(500, 5, 3);
             calculator.setFilter(new List<string>() { "hospital" });
             Assert.IsNull(calculator.filterParams.countFilters);
+        }
+
+        [Test]
+        public void CalkPopulationDensity()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setLevels(0, 50);
+            calculator.calculatePopulationDensity().getCSV();
         }
 
     } 

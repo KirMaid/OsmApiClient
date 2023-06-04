@@ -14,7 +14,6 @@ namespace MapLibrary
     {
         private string City;
         private bool withBD = false;
-        //double[][] heatmapArr;
         private OverpassAPIConnector overpassAPI;
         private OpenStreetXmlParser xmlParser;
         public DistanceParams filterParams;
@@ -96,40 +95,7 @@ namespace MapLibrary
         };
 
         public Dictionary<string, Dictionary<List<string>, List<string>>> dictTagsChosen = new Dictionary<string, Dictionary<List<string>, List<string>>>() { };
-        /// <summary>
-        /// Инициализирует облако тегов для фильтра
-/*        /// </summary>
-        public void initTags()
-        {
-            dictTags.Add(
-                "shop",
-                new Dictionary<List<string>, List<string>>() {
-                    [new List<string>() { "shop" }] = new List<string>() { "supermarket", "convenience", "mall", "general", "department_store" },
-                });
-
-            dictTags.Add(
-                "school",
-                new Dictionary<List<string>, List<string>>()
-                {
-                    [new List<string>() { "school" }] = new List<string>() { "school" },
-                });
-
-            dictTags.Add(
-               "hospital",
-               new Dictionary<List<string>, List<string>>()
-               {
-                   [new List<string>() { "amenity", "building" }] = new List<string>() { "clinic", "hospital" },
-               });
-
-            dictTags.Add(
-               "kindergarten",
-               new Dictionary<List<string>, List<string>>()
-               {
-                   [new List<string>() { "amenity", "building" }] = new List<string>() { "kindergarten" },
-
-               });
-        }*/
-
+      
         /// <summary>
         /// Служит для ручного добавления значений в фильтр значений (Для разработчиков)
         /// </summary>
@@ -169,14 +135,68 @@ namespace MapLibrary
         {
             this.filterParams = new DistanceParams(distance, count, minCount);
         }
-      
+
+        public void setLevels(int minLevel, int maxLevel)
+        {
+            this.filterParams = new DistanceParams(maxLevel,minLevel);
+        }
+
 
         public HeatmapElements calculateHeatmap()
         {
             return CalkHeatmap(xmlParser.ParseXmlBuildings(City,buildingsTags), xmlParser.ParseXmlFilter(City,dictTagsChosen), filterParams);
         }
 
-        public double calculateTheDistance(Center c1, Center c2)
+        public HeatmapElements calculatePopulationDensity()
+        {
+            return CalkPopulationDensity(xmlParser.ParseXmlBuildings(City, buildingsTags), filterParams);
+        }
+
+        public HeatmapElements calculateNumberOfStoreys()
+        {
+            return CalkNumberOfStoreys(xmlParser.ParseXmlBuildings(City, buildingsTags), filterParams);
+        }
+
+        public HeatmapElements CalkPopulationDensity(List<Node> addreses, DistanceParams filterParams) 
+        {
+            var list = new List<HeatmapElement>();
+            foreach (Node node in addreses)
+            {
+                HeatmapElement heatmapElement = new HeatmapElement();
+                heatmapElement.Center = node.Center;
+                int.TryParse(
+                node?.Tags?.Find(x => x.K == "building:levels")?.V ?? string.Empty,
+                out int levels
+                );
+                if (levels > filterParams.minCount && levels < filterParams.countObjects)
+                    heatmapElement.Coefficient = levels*10*3;
+                else
+                    heatmapElement.Coefficient = 0;
+                list.Add(heatmapElement);
+            }
+            return new HeatmapElements(list);
+        }
+        public HeatmapElements CalkNumberOfStoreys(List<Node> addreses, DistanceParams filterParams)
+        {
+            var list = new List<HeatmapElement>();
+            foreach (Node node in addreses)
+            {
+                HeatmapElement heatmapElement = new HeatmapElement();
+                heatmapElement.Center = node.Center;
+                int.TryParse(
+                node?.Tags?.Find(x => x.K == "building:levels")?.V ?? string.Empty,
+                out int levels
+                );
+                if (levels > filterParams.minCount && levels < filterParams.countObjects)
+                    heatmapElement.Coefficient = levels;
+                else
+                    heatmapElement.Coefficient = 0;
+                list.Add(heatmapElement);
+            }
+            return new HeatmapElements(list);
+        }
+
+        public double calculateTheDistance(Coordinate c1, Coordinate c2)
         {
             // перевести координаты в радианы
             var lat1 = c1.Latitude * Math.PI / 180;
@@ -302,102 +322,18 @@ namespace MapLibrary
             }
             return new HeatmapElements(list);
         }
-
-
-
-        /// <summary>
-        /// Основная функция для расчёта тепловой карты
-        /// </summary>
-        /// <returns>Возвращает успешность расчёта</returns>
-  /*      public Boolean calculateHeatmap()
-        {
-            switch (format)
-            {
-                case "array":
-                    return calculateHeatmapArray();
-                case "csv":
-                    getCSV();
-                    return true;
-                case "json":
-                    return getJSON();
-                    return true;
-                default:
-                    throw new Exception("Не выбран формат возвращаемых данных");
-            }
-        }
-
-        public Boolean calculateHeatmapArray()
-        {
-            try
-            {
-                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
-            }
-            catch (Exception e)
-            {
-                //LogError(e, "Ошибка при записи или расчёте");
-                throw;
-            }
-            return true;
-        }
-
-        public Boolean calculateHeatmapArray()
-        {
-            try
-            {
-                CalkHeatmapArray(ParseXmlBuildings(), ParseXmlFilter());
-            }
-            catch (Exception e)
-            {
-                //LogError(e, "Ошибка при записи или расчёте");
-                throw;
-            }
-            return true;
-        }
-
-        public void CalkHeatmapArray(List<Node> addreses, List<Node> filter, List<DistanceParams> filterParams)
-        {
-            heatmapArr = new double[addreses.Count][];
-            NumberFormatInfo MyFormat = new NumberFormatInfo();
-            MyFormat.NumberDecimalSeparator = ".";
-            int i = 0;
-            foreach (Node node in addreses)
-            {
-                HeatmapElement heatmapElement = new HeatmapElement();
-                heatmapElement.Center = node.Center;
-                var score = 0.0;
-                foreach (Node nodeFilter in filter)
-                {
-                    var dist = calculateTheDistance(node.Center, nodeFilter.Center);
-                    foreach (DistanceParams filterParam in filterParams)
-                    {
-                        if (dist < filterParam.distance)
-                        {
-                            if (score > (1 - filterParam.coefficient))
-                            {
-                                score = 1;
-                            }
-                            else
-                                score += filterParam.coefficient;
-                        }
-                    }
-                }
-                heatmapArr[i] = new double[3] { heatmapElement.Center.Latitude, heatmapElement.Center.Longitude, score };
-                score = 0.0;
-                i++;
-            }
-        }*/
     }
 
     public class Node
     {
         public long Id { get; set; }
         public List<Tag> Tags { get; set; }
-        public Center Center { get; set; }
+        public Coordinate Center { get; set; }
     }
 
     public class HeatmapElement
     {
-        public Center Center { get; set; }
+        public Coordinate Center { get; set; }
         public double Coefficient { get; set; }
     }
 
@@ -407,7 +343,7 @@ namespace MapLibrary
         public string V { get; set; }
     }
 
-    public class Center
+    public class Coordinate
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
@@ -415,15 +351,19 @@ namespace MapLibrary
 
     public class DistanceParams
     {
-        //public DistanceParams() { }
-
         public DistanceParams(int distance, int count, int minCount = 0)
         {
             this.distance = distance;
             this.countObjects = count;
             this.minCount = minCount;
         }
-        public int distance;
+
+        public DistanceParams(int count, int minCount = 0)
+        {
+            this.countObjects = count;
+            this.minCount = minCount;
+        }
+        public int distance = 0;
         public double coefficient;
         public int countObjects;
         public int countFilters = 0;
@@ -490,24 +430,6 @@ namespace MapLibrary
         /// </summary>
         /// <param name="dict">Массив с тегами для выборки</param>
         /// <returns>Строка запроса</returns>
-/*        public string BuildQueryFilterTestOld(string City, Dictionary<string, Dictionary<List<string>, List<string>>> dictTags)
-        {
-            filterKey = dictTags.Keys.ToList();
-            string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
-            string endStr = ");out center;out;";
-            foreach (var el in filterKey)
-            {
-                str += QueryFilter(dictTags[el]);
-            }
-            str = str + endStr;
-            return str;
-        }*/
-
-        /// <summary>
-        /// Построитель строки запроса фильтра к Overpass API
-        /// </summary>
-        /// <param name="dict">Массив с тегами для выборки</param>
-        /// <returns>Строка запроса</returns>
         public string BuildQueryFilter(string City, Dictionary<string, Dictionary<List<string>, List<string>>> dictTags)
         {
             string str = "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(";
@@ -562,6 +484,15 @@ namespace MapLibrary
             str = str + endStr;
             return str;
         }
+
+        /// <summary>
+        /// Построитель строки запроса зданий к Overpass API
+        /// </summary>
+        /// <returns>Строка запроса</returns>
+        public string BuildQueryCityPolygon(string City)
+        {
+            return "https://" + apiAddress + "/api/interpreter?data=" + $"area[name = \"{City}\"];(node[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"](area); way[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"](area);relation[\"boundary\"=\"administrative\"][\"admin_level\"=\"6\"](area););out center;out;";
+        }
     }
 
     public class OpenStreetXmlParser{
@@ -583,7 +514,7 @@ namespace MapLibrary
         {
             var attributes = AttributesToDictionary(reader);
             var tags = new List<Tag>();
-            Center center = new Center();
+            Coordinate center = new Coordinate();
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
 
             while (reader.Read() && reader.Name != WayName)
@@ -617,7 +548,7 @@ namespace MapLibrary
         private static Node GetNode(XmlReader reader)
         {
             var attributes = AttributesToDictionary(reader);
-            Center center = new Center();
+            Coordinate center = new Coordinate();
             var tags = new List<Tag>();
             IFormatProvider formatter = new NumberFormatInfo { NumberDecimalSeparator = "." };
             while (reader.Read() && reader.Name != NodeName)
@@ -706,5 +637,76 @@ namespace MapLibrary
             return ways;
         }
     }
+
+    //Класс для работы с полигонами, предназначет для разбиения области на полигоны
+    public class Polygon
+    {
+        public bool isPointInsidePolygon(List<Coordinate> coordinates,Coordinate coordinate)
+        {
+            int i1, i2, n, S1, S2, S3;
+            double S;
+            bool flag;
+            for (int i = 0;i < 6; i++)
+            {
+                flag = true;
+                i1 = i < 6 - 1 ? i + 1 : 0;
+                while (flag)
+                {
+                    i2 = i1 + 1;
+                    if (i2 >= 6)
+                        i2 = 0;
+                    if (i2 == (i < 6 - 1 ? i + 1 : 0))
+                        break;
+                    S = Math.Abs(
+                        coordinates[i1].Latitude * (coordinates[i2].Longitude -coordinates[i].Longitude) +
+                             coordinates[i2].Latitude * (coordinates[i].Longitude - coordinates[i1].Longitude) +
+                             coordinates[i].Latitude * (coordinates[i1].Longitude - coordinates[i2].Longitude));
+
+                }
+            }
+            return false;
+        }
+/*        int IsPointInsidePolygon(Point* p, int Number, int x, int y)
+        {
+            int i1, i2, n, N, S, S1, S2, S3, flag;
+            N = Number;
+            for (n = 0; n < N; n++)
+            {
+                flag = 0;
+                i1 = n < N - 1 ? n + 1 : 0;
+                while (flag == 0)
+                {
+                    i2 = i1 + 1;
+                    if (i2 >= N)
+                        i2 = 0;
+                    if (i2 == (n < N - 1 ? n + 1 : 0))
+                        break;
+                    S = abs(p[i1].x * (p[i2].y - p[n].y) +
+                             p[i2].x * (p[n].y - p[i1].y) +
+                             p[n].x * (p[i1].y - p[i2].y));
+                    S1 = abs(p[i1].x * (p[i2].y - y) +
+                              p[i2].x * (y - p[i1].y) +
+                              x * (p[i1].y - p[i2].y));
+                    S2 = abs(p[n].x * (p[i2].y - y) +
+                              p[i2].x * (y - p[n].y) +
+                              x * (p[n].y - p[i2].y));
+                    S3 = abs(p[i1].x * (p[n].y - y) +
+                              p[n].x * (y - p[i1].y) +
+                              x * (p[i1].y - p[n].y));
+                    if (S == S1 + S2 + S3)
+                    {
+                        flag = 1;
+                        break;
+                    }
+                    i1 = i1 + 1;
+                    if (i1 >= N)
+                        i1 = 0;
+                    break;
+                }
+                if (flag == 0)
+                    break;
+            }
+            return flag;*/
+        }
 }
 

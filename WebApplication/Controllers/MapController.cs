@@ -24,8 +24,5 @@ namespace WebApplication.Pages
 
             return View(calculator.calculateHeatmap().getJSON());
         }
-
-        [HttpGet]
-        [Route("/api/{authorId:int,}")]
     }
 }
