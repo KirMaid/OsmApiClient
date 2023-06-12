@@ -22,7 +22,7 @@ namespace WebApplication.Pages
             calculator.setDistanceAndCount(500, 5, 4);
             calculator.setFilter(new List<string>() { "hospital" });
 
-            return View(calculator.calculateHeatmap().getJSON());
+            return View(calculator.calculateHeatmap().toJSON());
         }
     }
 }
