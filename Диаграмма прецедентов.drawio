@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2023-06-17T15:01:35.522Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="dHPQbg971YJtqBvc-VhD" version="21.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2023-06-18T16:05:32.864Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36" etag="ibf2H2HAU5n7g6_2IXDd" version="21.4.0" type="github">
   <diagram name="Страница 1" id="cysYTuZrdJdEyRGJLU3K">
-    <mxGraphModel dx="1248" dy="764" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+    <mxGraphModel dx="1248" dy="707" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -199,20 +199,19 @@
           <mxGeometry x="1234" y="537" width="100" height="40" as="geometry" />
         </mxCell>
         <mxCell id="02hP_4ne6rKL2ZQWCoD8-57" value="Конец" style="strokeWidth=2;html=1;shape=mxgraph.flowchart.terminator;whiteSpace=wrap;" vertex="1" parent="1">
-          <mxGeometry x="1075" y="740" width="100" height="60" as="geometry" />
+          <mxGeometry x="1107" y="749" width="100" height="60" as="geometry" />
         </mxCell>
-        <mxCell id="02hP_4ne6rKL2ZQWCoD8-56" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.45;entryY=-0.075;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="02hP_4ne6rKL2ZQWCoD8-32" target="02hP_4ne6rKL2ZQWCoD8-57">
+        <mxCell id="02hP_4ne6rKL2ZQWCoD8-58" value="&lt;span style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Алгоритм стандартного расчёта&lt;/b&gt;&lt;/span&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="905" y="60" width="510" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="02hP_4ne6rKL2ZQWCoD8-62" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="02hP_4ne6rKL2ZQWCoD8-32" target="02hP_4ne6rKL2ZQWCoD8-57">
           <mxGeometry relative="1" as="geometry">
-            <mxPoint x="1430" y="690" as="targetPoint" />
             <Array as="points">
-              <mxPoint x="1420" y="220" />
-              <mxPoint x="1420" y="720" />
-              <mxPoint x="1120" y="720" />
+              <mxPoint x="1419" y="220" />
+              <mxPoint x="1419" y="715" />
+              <mxPoint x="1157" y="715" />
             </Array>
           </mxGeometry>
-        </mxCell>
-        <mxCell id="02hP_4ne6rKL2ZQWCoD8-58" value="&lt;font style=&quot;font-size: 16px;&quot;&gt;&lt;b&gt;Диаграмма прецедентов использования модуля&lt;/b&gt;&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
-          <mxGeometry x="905" y="60" width="510" height="30" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
