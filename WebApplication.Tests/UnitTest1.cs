@@ -19,59 +19,6 @@ namespace WebApplication.Tests
         {
             
         }
-        /*        [Test]
-                public void calculateHeatmap()
-                {
-                    MapLibrary map = new MapLibrary();
-                    var test = map.calculateHeatmap();
-                    foreach (WebApplication.HeatmapElement elem in test)
-                    {
-                        Console.WriteLine(elem.Coefficient);
-                    }
-                }*/
-
-        /*        [Test]
-                public void BuildQueryCity()
-                {
-                    MapCalculator calculator = new MapCalculator();
-                    calculator.setCity("Волгоград");
-                    Assert.IsNull(calculator.BuildQueryCity());
-                }
-
-                [Test]
-                public void ParseXmlBuildings()
-                {
-                    MapCalculator calculator = new MapCalculator();
-                    calculator.setCity("Волгоград");
-                    Assert.IsNull(calculator.ParseXmlBuildings());
-                }
-
-                [Test]
-                public void calculateHeatmapArray()
-                {
-                    MapCalculator calculator = new MapCalculator();
-                    calculator.setCity("Волгоград");
-                }
-
-                [Test]
-                public void ParseXmlFilter()
-                {
-                    MapCalculator calculator = new MapCalculator();
-                    calculator.setCity("Волгоград");
-                    calculator.setFilter(new List<string>() { "shop" });
-                    var test = calculator.ParseXmlFilter();
-                    Assert.IsNull(test);
-                }
-
-                [Test]
-                public void BuildQueryFilter()
-                {
-                    MapCalculator calculator = new MapCalculator();
-                    calculator.setCity("Волгоград");
-                    calculator.setFilter(new List<string>() { "shop"});
-
-                    Assert.IsNull(calculator.BuildQueryFilter());
-                }*/
         [Test]
         public void BuildQueryCity()
         {
@@ -116,9 +63,19 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(500,5,4);
-            calculator.setFilter(new List<string>() { "hospital" });
+            calculator.setDistanceAndCount(500,5,2);
+            calculator.setFilter(new List<string>() { "hospital","kindergarten" });
             calculator.calculateHeatmap().getCSV();
+        }
+
+        [Test]
+        public void getCSVParallel()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 2);
+            calculator.setFilter(new List<string>() { "hospital", "kindergarten" });
+            calculator.calculateHeatmap(true).getCSV();
         }
 
         [Test]
@@ -126,9 +83,97 @@ namespace WebApplication.Tests
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(500, 5, 4);
-            calculator.setFilter(new List<string>() { "hospital" });
-            calculator.calculateHeatmap().getJSON();
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap().getJSON("D:\\test.json");
+        }
+
+        [Test]
+        public void getJSONParallel()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap(true).getJSON("D:\\test.json");
+        }
+
+        [Test]
+        public void toJSON()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap().toJSON();
+        }
+
+        [Test]
+        public void toJSONParallel()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap(true).toJSON();
+        }
+        [Test]
+        public void toList()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap().getList();
+        }
+        [Test]
+        public void toListParallel()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 0);
+            calculator.setFilter(new List<string>() { "kindergarten" });
+            calculator.calculateHeatmap(true).getList();
+        }
+
+        [Test]
+        public void toListReverse()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5);
+            calculator.setFilter(new List<string>() { "bar" });
+            calculator.calculateHeatmapReverse().getList();
+        }
+
+        [Test]
+        public void toJSONReverse()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5);
+            calculator.setFilter(new List<string>() { "bar" });
+            calculator.calculateHeatmapReverse().toJSON();
+        }
+
+        [Test]
+        public void getJSONReverse()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5);
+            calculator.setFilter(new List<string>() { "bar" });
+            calculator.calculateHeatmapReverse().getJSON();
+        }
+
+        [Test]
+        public void getCSVReverse()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(1000, 5);
+            calculator.setFilter(new List<string>() { "bar" });
+            calculator.calculateHeatmapReverse().getCSV();
         }
 
         [Test]
@@ -138,22 +183,8 @@ namespace WebApplication.Tests
             calculator.setCity("Волгоград");
             calculator.setDistanceAndCount(500, 5, 0);
             calculator.setFilter(new List<string>() { "hospital" });
-            Assert.IsNull(calculator.getApiConnector().BuildQueryFilter("Волгоград",calculator.dictTagsChosen));
+            Assert.IsNull(calculator.getApiConnector().BuildQueryFilterOld("Волгоград",calculator.dictTagsChosen));
         }
-
-
-/*        [Test]
-        public void ParseXmlBuildings()
-        {
-            MapCalculator calculator = new MapCalculator();
-            calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(500, 5, 0);
-            calculator.setFilter(new List<string>() { "hospital" });
-            //Assert.IsNull(calculator.getApiConnector().BuildQueryCity("Волгоград", calculator.buildingsTags));
-            List<Node> nodes = calculator.getXmlParser().ParseXmlBuildings("Волгоград", calculator.buildingsTags);
-            Assert.IsNull(calculator.getXmlParser().ParseXmlBuildings("Волгоград", calculator.buildingsTags));
-            //Assert.IsNull(calculator.getApiConnector().Pars);
-        }*/
 
         [Test]
         public void countFilters()
@@ -177,17 +208,69 @@ namespace WebApplication.Tests
         }
 
         [Test]
-        public void multiFilterCalkNew()
+        public void multiFilterCalkCSV()
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
             calculator.setDistanceAndCount(500, 5, 3);
             calculator.setFilter(new List<string>() { "hospital", "bus_stop" });
-            calculator.calculateHeatmapNew().getCSV();
+            calculator.calculateHeatmap().getCSV();
+        }
+
+         [Test]
+        public void multiFilterCalkJSON()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 3);
+            calculator.setFilter(new List<string>() { "hospital", "bus_stop" });
+            calculator.calculateHeatmap().getJSON();
         }
 
         [Test]
-        public void CalkPopulationDensity()
+        public void multiFilterCalkStringJSON()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setDistanceAndCount(500, 5, 3);
+            calculator.setFilter(new List<string>() { "hospital", "bus_stop" });
+            calculator.calculateHeatmap().toJSON();
+        }
+
+        [Test]
+        public void CalkPopulationDensityList()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.calculatePopulationDensity().getList();
+        }
+
+        [Test]
+        public void CalkPopulationDensityCSV()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.calculatePopulationDensity().getCSV();
+        }
+
+        [Test]
+        public void CalkPopulationDensityJSON()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.calculatePopulationDensity().getJSON();
+        }
+
+        [Test]
+        public void CalkPopulationDensityStringJSON()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            var json = calculator.calculatePopulationDensity().toJSON();
+        }
+
+        [Test]
+        public void CalkNumberOfStoreys()
         {
             MapCalculator calculator = new MapCalculator();
             calculator.setCity("Волгоград");
@@ -195,6 +278,8 @@ namespace WebApplication.Tests
             //calculator.calculatePopulationDensity().getCSV();
             calculator.calculateNumberOfStoreys().getCSV();
         }
+
+
 
     } 
 };

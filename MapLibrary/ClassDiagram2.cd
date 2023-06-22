@@ -1,67 +1,86 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ClassDiagram MajorVersion="1" MinorVersion="1">
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="MapLibrary.MapCalculator">
-    <Position X="8.25" Y="0.5" Width="1.75" />
+    <Position X="11.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AQAAoAAABACAAACISAERECECIgAAAAAQQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAoACAAACQABCMSAERHCECsgBAQAAQwEAgABABAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="OverpassAPIConnector" />
+      <Property Name="DistanceParams" />
+      <Property Name="HeatmapElements" />
+      <Property Name="OpenStreetXmlParser" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="MapLibrary.Node">
-    <Position X="3" Y="3" Width="1.5" />
+    <Position X="4" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAACAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAACAAAAAAAgAAAAAAAAAAAAAAAAAEAAAAAAAAAIAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Tag" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="MapLibrary.HeatmapElement">
-    <Position X="3" Y="5" Width="1.5" />
+    <Position X="1.5" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAIAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAABAAAAAAAAAAAAEAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Coordinate" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="MapLibrary.Tag">
-    <Position X="1" Y="5" Width="1.5" />
+    <Position X="4" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="MapLibrary.Center">
-    <Position X="1" Y="0.5" Width="1.5" />
+  <Class Name="MapLibrary.Coordinate">
+    <Position X="1.5" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MapLibrary.DistanceParams">
-    <Position X="1" Y="2.5" Width="1.5" />
+    <Position X="8.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAgAAAAAAAAAAAQAAAAEAAAAAAAAAAEAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAgAAAAAAAAAAAQAAAAEAAAAAAAAAAEAAAAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MapLibrary.HeatmapElements">
-    <Position X="3" Y="0.5" Width="1.75" />
+    <Position X="4.5" Y="4.5" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAQAAAgAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAABAAAAAAAAAAgAAAAAAAAQAACgEAAAg=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="HeatmapElement" />
+      <Property Name="Node" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="MapLibrary.OverpassAPIConnector">
-    <Position X="5.25" Y="4" Width="2" />
+    <Position X="6.5" Y="4.25" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAQABAAAAAEAAAAAQAAAAACAAAAAgAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAIAABAEAAAkAAAAAQAAAAACAAAAAgAAAAAgABAAA=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MapLibrary.OpenStreetXmlParser">
-    <Position X="5.5" Y="0.5" Width="1.75" />
+    <Position X="6.25" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>QAAAAAAABAAAAAAAAAEABAAAEAAAAAAAACAQAAAAAAE=</HashCode>
+      <HashCode>QAAAAAAABAAAAAAABAEABAAAEAAAAAAAACAQAAEAAAE=</HashCode>
       <FileName>MapCalculator.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Property Name="Node" />
+    </ShowAsAssociation>
   </Class>
   <Font Name="Segoe UI" Size="9" />
 </ClassDiagram>
