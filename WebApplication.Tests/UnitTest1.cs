@@ -68,6 +68,7 @@ namespace WebApplication.Tests
             calculator.calculateHeatmap().getCSV();
         }
 
+
         [Test]
         public void getCSVParallel()
         {
@@ -279,6 +280,15 @@ namespace WebApplication.Tests
             calculator.calculateNumberOfStoreys().getCSV();
         }
 
+
+        [Test]
+        public void getCSVFilter()
+        {
+            MapCalculator calculator = new MapCalculator();
+            calculator.setCity("Волгоград");
+            calculator.setFilter(new List<string>() { "restaurant"});
+            calculator.calculateFilterCategory().getCSV();
+        }
 
 
     } 

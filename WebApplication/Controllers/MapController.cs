@@ -15,14 +15,14 @@ namespace WebApplication.Pages
         //[Route("Default/GetAuthor/{authorId:int}")]
         public ActionResult/*double[][]*/ Index()
         {
-            MapCalculator calculator = new MapCalculator();
+            //MapCalculator calculator = new MapCalculator();
             //MapLibrary map = new MapLibrary();
             //return /*var result = */ map.calculateHeatmapArray();
-            calculator.setCity("Волгоград");
-            calculator.setDistanceAndCount(500, 5, 4);
-            calculator.setFilter(new List<string>() { "hospital" });
+            //calculator.setCity("Волгоград");
+            //calculator.setDistanceAndCount(500, 5, 4);
+            //calculator.setFilter(new List<string>() { "hospital" });
 
-            return View(calculator.calculateHeatmap().toJSON());
+            return View(/*calculator.calculateHeatmap().toJSON()*/);
         }
     }
 }

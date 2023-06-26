@@ -23,7 +23,7 @@ namespace MapLibrary
         private bool useCache;
         private OverpassAPIConnector overpassAPI;
         private OpenStreetXmlParser xmlParser;
-        public DistanceParams filterParams;
+        public DistanceParams filterParams = new DistanceParams();
         Dictionary<string, DateTime> updateDataTime = new Dictionary<string, DateTime>();
         Dictionary<string, List<Node>> city = new Dictionary<string, List<Node>>();
 
@@ -138,6 +138,14 @@ namespace MapLibrary
 
                }
             },
+            {
+               "restaurant",
+               new Dictionary<List<string>, List<string>>()
+               {
+                   [new List<string>() {"amenity"}] = new List<string>() { "restaurant" },
+
+               }
+            }
         };
 
         public Dictionary<string, Dictionary<List<string>, List<string>>> dictTagsChosen = new Dictionary<string, Dictionary<List<string>, List<string>>>() { };
@@ -211,6 +219,11 @@ namespace MapLibrary
                 return CalkHeatmap(xmlParser.ParseXmlBuildings(City, buildingsTags), xmlParser.ParseXmlFilter(City, dictTagsChosen), filterParams);
         }
 
+        public HeatmapElements calculateFilterCategory()
+        {
+            return CalkFilterCategory(xmlParser.ParseXmlFilter(City, dictTagsChosen));
+        }
+
         public HeatmapElements calculateHeatmapReverse()
         {
             return CalkHeatmapReverse(xmlParser.ParseXmlBuildings(City, buildingsTags), xmlParser.ParseXmlFilter(City, dictTagsChosen), filterParams);
@@ -248,6 +261,22 @@ namespace MapLibrary
                 else
                     heatmapElement.Coefficient = 0;
                 list.Add(heatmapElement);
+            }
+            return new HeatmapElements(list);
+        }
+
+        public HeatmapElements CalkFilterCategory(List<List<Node>> addreses)
+        {
+            var list = new List<HeatmapElement>();
+            foreach (List<Node> nodes in addreses)
+            {
+                foreach (Node node in nodes) 
+                { 
+                    HeatmapElement heatmapElement = new HeatmapElement();
+                    heatmapElement.Center = node.Center;
+                    heatmapElement.Coefficient = 1.0;
+                    list.Add(heatmapElement);
+                }
             }
             return new HeatmapElements(list);
         }
@@ -574,38 +603,6 @@ namespace MapLibrary
             }
             return new HeatmapElements(list);
         }
-
-        public OverpassAPIConnector OverpassAPIConnector
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public DistanceParams DistanceParams
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public HeatmapElements HeatmapElements
-        {
-            get => default;
-            set
-            {
-            }
-        }
-
-        public OpenStreetXmlParser OpenStreetXmlParser
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 
     public class Node
@@ -613,28 +610,12 @@ namespace MapLibrary
         public long Id { get; set; }
         public List<Tag> Tags { get; set; }
         public Coordinate Center { get; set; }
-
-        public Tag Tag
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 
     public class HeatmapElement
     {
         public Coordinate Center { get; set; }
         public double Coefficient { get; set; }
-
-        public Coordinate Coordinate
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 
     public class Tag
@@ -651,6 +632,9 @@ namespace MapLibrary
 
     public class DistanceParams
     {
+        public DistanceParams()
+        {
+        }
         public DistanceParams(int distance, int count, int minCount = 0)
         {
             this.distance = distance;
